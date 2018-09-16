@@ -1,0 +1,48 @@
+
+
+
+<div class="main-form" align="center">
+  <mat-card class="example-form">
+      <mat-card-title align="center">Sign In</mat-card-title>
+      <mat-card-content>
+        
+        <form>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Enter your email" [formControl]="email" required>
+            <!-- <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error> -->
+          </mat-form-field>
+      
+          <mat-form-field class="example-full-width">
+            <input type="password" matInput placeholder="Enter a valid password" [formControl]="pass" required>
+            <!-- <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" matInput placeholder="Enter a valid password" [formControl]="pass" required>
+            <mat-error *ngIf="pass.invalid">{{getErrorMessagePass()}}</mat-error> -->
+          </mat-form-field>
+        </form>
+
+
+  
+
+      </mat-card-content> 
+      
+      
+      <button class="button-full-width" mat-raised-button 
+        (click) = "signIn();">Sign In  
+      </button>
+
+      <button class="button-full-width" mat-raised-button 
+        (click) = "logOut();">Salir      
+      </button>
+      
+      <!-- <button class="button-full-width" mat-raised-button color="primary">Register</button>
+
+      <button class="button-full-width" mat-raised-button 
+          (click) = "signInGoogle()">
+          <img width="30" [src] = "googleICON" />Sign in with Google
+      </button> -->
+
+      
+
+      
+  </mat-card>
+</div>
+  

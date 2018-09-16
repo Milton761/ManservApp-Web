@@ -1,0 +1,98 @@
+
+
+<h4>List of Reports</h4>
+
+
+
+<div class="list-group">
+
+    <button type="button" class="list-group-item list-group-item-action active">
+      <div class="row"  >
+        <div class="col-md-2">Agency</div>
+        <div class="col-md-8">Administrator</div>
+        <div class="col-md-1">Option </div>
+        <div class="col-md-1" align="right">Date </div>
+        
+      </div>
+    </button>
+
+    <a class="list-group-item list-group-item" *ngFor="let report of reports | async"   >
+  <div class="row">
+    <div class="col-md-2 text-dark"><a class="link" [routerLink]="['/report', report.id]">{{report.offName}}</a></div>
+    <div class="col-md-7 text-dark">{{report.admin}}</div>
+    <div class="col-md-1 text-dark" align="right"><button type="button" class="btn btn-outline-info m2" disabled>Edit</button></div>
+    <div class="col-md-1 text-dark" align="left"><button type="button" class="btn btn-outline-danger m1" (click)="deleteReport(report.id)">Delete</button></div>
+    <div class="col-md-1 text-secondary" align="right">{{report.dateStart  | date:'dd MMM' }}</div>
+  </div>
+  </a>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-11 text-dark"></div>
+  <div class="col-md-auto text-dark" align="rigth">
+    <div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-secondary" (click)="previus()"><</button>
+    <button type="button" class="btn btn-secondary" (click)="next()">></button>
+    </div>
+  </div>
+</div>
+
+<!-- 
+<mat-table [dataSource]="reports" matSort class="mat-elevation-z8">
+    
+    <ng-container matColumnDef="admin">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Administrator </mat-header-cell>
+      <mat-cell *matCellDef="let report"> {{report.admin}} </mat-cell>
+    </ng-container>
+  
+    
+    <ng-container matColumnDef="offName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Agency </mat-header-cell>
+      <mat-cell *matCellDef="let report"> {{report.offName}} </mat-cell>
+    </ng-container>
+  
+    
+    <ng-container matColumnDef="dateStart">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Date Start</mat-header-cell>
+      <mat-cell *matCellDef="let report"> {{report.dateStart}} </mat-cell>
+    </ng-container>
+  
+    
+    <ng-container matColumnDef="dateEnd" >
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Date End </mat-header-cell>
+      <mat-cell *matCellDef="let report"> {{report.dateEnd}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="probServ">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Problem Service </mat-header-cell>
+      <mat-cell *matCellDef="let report"> {{report.probServ}} </mat-cell>
+    </ng-container>
+  
+    
+    <ng-container matColumnDef="serScope">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Service Scope </mat-header-cell>
+      <mat-cell *matCellDef="let report"> {{report.serScope}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="op">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Options </mat-header-cell>
+        <mat-cell *matCellDef="let report">
+            <button mat-stroked-button [routerLink]="['/report', report.id]">Enter</button>
+        </mat-cell>
+      </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+
+<mat-nav-list>
+    <h3 mat-subheader>Reports</h3>
+    <mat-list-item *ngFor="let report of reports | async" [routerLink]="['/report', report.id]"> 
+      <div class="row">
+          <div class="col-xs-12 col-md-8">.col-xs-12 .col-md-8</div>
+          <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+        </div>
+    </mat-list-item>
+</mat-nav-list> -->

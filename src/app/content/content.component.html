@@ -1,0 +1,56 @@
+<button type="button" class="btn btn-outline-primary" onClick="window.print()">Save as PDF</button>
+
+<div class="myDivToPrint">
+  <div *ngFor="let place of obsplaces | async as places  ; index as ia">
+    <div *ngFor="let pic of place.pics  | async as pics ; index as ib" >
+        
+        
+        <div class="container" *ngIf="ib%3===0">
+            <h2>Tecnical Report</h2>
+            <hr>
+            <h4>Place: {{place.name}}</h4>
+            <div class="row" >
+                <div class="col-md-4" > 
+                  <div class="card">
+                    <img src="{{pics[ib].imgUrl}}" class="img-fluid" alt="Responsive image">
+                    <div class="inner">
+                      <h6>{{pics[ib].title}}</h6>
+                      <a>{{pics[ib].description}}</a>
+                    </div> 
+                  </div>
+                </div>
+                <div class="col-md-4" *ngIf="ib+1 < pics.length">
+                    <div class="card">
+                        <img src="{{pics[ib+1].imgUrl}}" class="img-fluid" alt="Responsive image">
+                        <div class="inner">
+                          <h6>{{pics[ib+1].title}}</h6>
+                          <a>{{pics[ib+1].description}}</a>
+                        </div> 
+                      </div>
+                </div>
+                <div class="col-md-4" *ngIf="ib+2 < pics.length">
+                    <div class="card">
+                        <img src="{{pics[ib+2].imgUrl}}" class="img-fluid" alt="Responsive image">
+                        <div class="inner">
+                          <h6>{{pics[ib+2].title}}</h6>
+                          <a>{{pics[ib+2].description}}</a>
+                        </div> 
+                      </div>
+                </div>
+            </div>
+            <hr>
+            <div class="inner">
+              <h5>Comments: </h5> 
+              <a> asdasd{{place.description}}</a>
+            </div>
+        </div>
+        
+        <div class="hideMeInPrint" style="page-break-before:always" > <div style="height: 1cm;"></div></div>
+        
+    </div>
+  </div>
+</div>
+
+
+
+

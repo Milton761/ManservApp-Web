@@ -1,0 +1,40 @@
+
+
+<div class="row">
+  <div class="col-xl-2">
+    <h4> Agency Template</h4> 
+  </div>
+  <div class="col-xl-6">
+    
+  </div>
+  <div class="col-xl-1">
+    <input #code type="text" class="form-control" placeholder="Code"> 
+  </div>
+  <div class="col-xl-2" >
+   <input #name type="text" class="form-control" placeholder="Name">
+  </div>
+  <div class="col col-xl-1" align="right">
+    <button type="button" class="btn btn-outline-success" (click)="addAgency(code.value, name.value)">New</button>
+  </div>
+</div>
+
+<div style="height: 5mm;"></div>
+
+<div class="list-group">
+
+  <button type="button" class="list-group-item list-group-item-action active">
+    <div class="row"  >
+      <div class="col-md-2">Code</div>
+      <div class="col-md-10">Name</div>
+      
+    </div>
+  </button>
+
+  <a class="list-group-item list-group-item-action" *ngFor="let agency of agencies | async">
+  <div class="row">
+    <div class="col-md-2 text-dark"><a class="link" [routerLink]="['/agency', agency.code]">{{agency.code}}</a></div>
+    <div class="col-md-9 text-dark">{{agency.name}}</div>
+    <div class="col-md-1 text-dark" align="right"><button type="button" class="btn btn-outline-danger m1" (click)="deleteAgency(agency.code)">Delete</button></div>
+  </div>
+  </a>
+</div>

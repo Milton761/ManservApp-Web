@@ -1,0 +1,47 @@
+.container {
+	border-radius: 5px;
+	background: #f2f2f2;
+	width: 297mm;
+	height: 209.5mm;  
+	padding-top: 2mm; 	
+}
+
+
+
+.img-fluid{
+	object-fit: cover;
+	width: 9cm;
+	height: 11cm;
+}
+
+.inner{
+    padding-top: 1mm;
+    padding-right: 1mm;
+    padding-bottom: 1mm;
+    padding-left: 1mm;
+}
+
+@media print {
+	
+    .myDivToPrint {
+		
+        background-color: blue;
+        height: 100%;
+        width: 100%;
+		position: absolute;
+		
+        top: 0;
+        left: 0;
+		margin: 0;
+
+		display: block;
+		
+	}
+	.hideMeInPrint { display: none; }
+	@page {
+		size: A4 landscape
+	}
+	.Footer { display:none; }
+	.Header { display:none; }
+	
+}

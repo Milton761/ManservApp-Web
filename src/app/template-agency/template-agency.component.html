@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-xl-2">
+    <h4> Places</h4> 
+  </div>
+  <div class="col-xl-7">
+    
+  </div>
+  <div class="col-xl-2" >
+   <input #boxName type="text" class="form-control" placeholder="Name" [(ngModel)]="name">
+  </div>
+  <div class="col col-xl-1" align="right">
+    <button type="button" class="btn btn-outline-success" (click)="addPlace(boxName.value)">Add</button>
+  </div>
+</div>
+
+<div style="height: 5mm;"></div>
+
+<div class="list-group">
+
+  <button type="button" class="list-group-item list-group-item-action active">
+    <div class="row"  >
+      <div class="col-md-10">Name</div>
+    </div>
+  </button>
+
+  <a class="list-group-item list-group-item-action" *ngFor="let place of places | async">
+  <div class="row">
+    <div class="col-md-11 text-dark">{{place.name}}</div>
+    <div class="col-md-1 text-dark" align="right"><button type="button" class="btn btn-outline-danger m1" (click)="deletePlace(place.id)">Delete</button></div>
+  </div>
+  </a>
+</div>
