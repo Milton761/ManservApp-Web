@@ -2,12 +2,19 @@ import { AngularFirestore, AngularFirestoreCollection, QueryDocumentSnapshot } f
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable, observable, combineLatest, Subject } from 'rxjs';
 import { map, concat, merge } from 'rxjs/operators';
-import { MatSort } from '@angular/material';
+import { MatSort, MatDialogConfig, MatDialog } from '@angular/material';
+import { EditReportComponent } from '../edit-report/edit-report.component';
 
 export interface Report {
   admin: string;
-  offName: string; dateEnd: string; dateStart: string; offCode: string; probServ: string; serScope: string; }
-export interface FullReport extends Report {id: string; doc: QueryDocumentSnapshot<Report>; }
+  offName: string;
+  dateEnd: string;
+  dateStart: string;
+  offCode: string;
+  probServ: string;
+  serScope: string;
+}
+export interface FullReport extends Report { id: string; doc: QueryDocumentSnapshot<Report>; }
 
 @Component({
   selector: 'app-screen',
@@ -17,6 +24,7 @@ export interface FullReport extends Report {id: string; doc: QueryDocumentSnapsh
 export class ScreenComponent implements OnInit {
 
   private reportCollection: AngularFirestoreCollection<Report>;
+  private idReportSelected: string;
   reports: Observable<FullReport[]>;
   pagination: Array<any>;
   displayedColumns = [
@@ -36,12 +44,12 @@ export class ScreenComponent implements OnInit {
   private currentSize: number;
 
 
-  constructor(private readonly afs: AngularFirestore, private readonly afs2: AngularFirestore) {
+  constructor(private readonly afs: AngularFirestore, private readonly afs2: AngularFirestore, private dialog: MatDialog) {
     console.log('test0');
     this.reportCollection = afs.collection<FullReport>('reports',
       ref => ref
-      .orderBy('dateStart', 'desc')
-      .limit(2));
+        .orderBy('dateStart', 'desc')
+        );
 
     // .snapshotChanges() returns a DocumentChangeAction[], which contains
     // a lot of information about "what happened" with each change. If you want to
@@ -49,7 +57,8 @@ export class ScreenComponent implements OnInit {
     this.reports = this.reportCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Report;
-        const fReport: FullReport = { admin: data.admin,
+        const fReport: FullReport = {
+          admin: data.admin,
           offName: data.offName,
           dateEnd: data.dateEnd,
           dateStart: data.dateStart,
@@ -85,9 +94,9 @@ export class ScreenComponent implements OnInit {
   next() {
     console.log('Next');
     this.reportCollection = this.afs.collection<Report>('reports',
-      ref => ref.orderBy('dateStart', 'desc').limit(2).startAfter(this.lastVisible) );
+      ref => ref.orderBy('dateStart', 'desc').limit(2).startAfter(this.lastVisible));
 
-      const newData = this.reportCollection.snapshotChanges().pipe(
+    const newData = this.reportCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Report;
         const fReport: FullReport = {
@@ -129,7 +138,7 @@ export class ScreenComponent implements OnInit {
     }
     // this.pagination.slice((this.currentIndex - this.currentSize), this.c);
     this.reportCollection = this.afs.collection<Report>('reports',
-      ref => ref.orderBy('dateStart', 'desc').limit(2).startAt (this.previusPointer) );
+      ref => ref.orderBy('dateStart', 'desc').limit(2).startAt(this.previusPointer));
 
     this.reports = this.reportCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
@@ -160,8 +169,45 @@ export class ScreenComponent implements OnInit {
         console.log('CI', this.currentIndex);
       }
     );
+  }
 
+  openEdit(reportEdit: FullReport) {
 
+    this.idReportSelected = reportEdit.id;
+    console.log(reportEdit);
+    console.log('open dialog');
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = reportEdit;
+
+    const dialogRef = this.dialog.open(EditReportComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      data => {
+
+        if (data !== undefined) {
+          console.log(data.dateEnd);
+          const E = new Date(data.dateEnd);
+          const S = new Date(data.dateStart);
+
+          const newS = (S.getMonth() + 1) + '-' + S.getDate() + '-' + S.getFullYear();
+          const newE = (E.getMonth() + 1) + '-' + E.getDate() + '-' + E.getFullYear();
+
+          const r: Report = {
+            admin: data.admin,
+            offName: data.agency,
+            dateEnd: newE,
+            dateStart: newS,
+            offCode: '00',
+            probServ: data.probServ,
+            serScope: data.servScop
+          };
+          console.log(r);
+          this.afs.collection('reports').doc(this.idReportSelected).update(r);
+        }
+      }
+    );
   }
 
 }

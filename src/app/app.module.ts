@@ -14,6 +14,7 @@ import { ScreenComponent } from './screen/screen.component';
 import { ContentComponent } from './content/content.component';
 import { TemplateComponent } from './template/template.component';
 import { TemplateAgencyComponent } from './template-agency/template-agency.component';
+import { EditReportComponent } from './edit-report/edit-report.component';
 
 
 
@@ -26,6 +27,7 @@ import { TemplateAgencyComponent } from './template-agency/template-agency.compo
     ContentComponent,
     TemplateComponent,
     TemplateAgencyComponent,
+    EditReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +37,7 @@ import { TemplateAgencyComponent } from './template-agency/template-agency.compo
     AppRoutingModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [EditReportComponent]
 })
 export class AppModule { }

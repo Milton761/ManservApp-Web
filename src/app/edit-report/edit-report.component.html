@@ -1,0 +1,62 @@
+<h2 mat-dialog-title> Report </h2>
+
+<mat-dialog-content [formGroup]="form">
+	<div>
+		<mat-form-field>
+			<input matInput 
+			placeholder="Agency"
+			formControlName="agency">
+		</mat-form-field>
+	</div>
+	<div>
+		<mat-form-field>
+			<input matInput 
+			placeholder="admin"
+			formControlName="admin">
+		</mat-form-field>
+	</div>
+	<div>
+		<mat-form-field>
+			<input matInput [matDatepicker]="picker1" 
+			placeholder="Choose a date"
+			formControlName="dateStart">
+			<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+			<mat-datepicker #picker1></mat-datepicker>
+		</mat-form-field>
+	</div>
+	<div>
+		<mat-form-field>
+			<input matInput [matDatepicker]="picker2" placeholder="Choose a date"
+			formControlName="dateEnd">
+			<mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+			<mat-datepicker #picker2></mat-datepicker>
+		</mat-form-field>
+	</div>
+	
+	<div>
+		<mat-form-field>
+			<textarea matInput placeholder="Problem Service Description"
+			formControlName="probServ"></textarea>
+		</mat-form-field>
+	</div>
+	<div>
+		<mat-form-field>
+			<textarea matInput placeholder="Service Scope"
+			formControlName="servScop"></textarea>
+		</mat-form-field>
+	</div>
+	
+
+</mat-dialog-content>
+
+
+<mat-dialog-actions>
+	<button mat-raised-button (click)="cancel()">
+		Cancel
+	</button>
+	<button mat-raised-button color="primary" (click)="save()">
+		Save
+	</button>
+</mat-dialog-actions>
+
+

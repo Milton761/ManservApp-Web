@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { MatNativeDateModule} from '@angular/material';
 import { AuthService } from './auth.service';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -15,6 +16,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatIconModule} from '@angular/material/icon';
 import { NguiInviewModule, NguiListModule, NguiUtilsModule } from '@ngui/common';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   imports: [
@@ -35,7 +38,10 @@ import { NguiInviewModule, NguiListModule, NguiUtilsModule } from '@ngui/common'
     MatIconModule,
     NguiInviewModule,
     NguiListModule,
-    NguiUtilsModule
+    NguiUtilsModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     MatInputModule,
@@ -52,8 +58,11 @@ import { NguiInviewModule, NguiListModule, NguiUtilsModule } from '@ngui/common'
     MatIconModule,
     NguiInviewModule,
     NguiListModule,
-    NguiUtilsModule
+    NguiUtilsModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [AuthService]
+  providers: [AuthService],
 })
 export class CoreModule { }
