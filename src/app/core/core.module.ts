@@ -19,6 +19,7 @@ import { NguiInviewModule, NguiListModule, NguiUtilsModule } from '@ngui/common'
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -41,7 +42,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     NguiUtilsModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   exports: [
     MatInputModule,

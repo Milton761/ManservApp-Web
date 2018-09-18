@@ -1,0 +1,17 @@
+<h2 mat-dialog-title> {{title}} </h2>
+
+<mat-dialog-content>
+{{message}}
+</mat-dialog-content>
+
+
+<mat-dialog-actions align="right">
+	<button mat-raised-button (click)="cancel()">
+		Cancel
+	</button>
+	<button mat-raised-button color="primary" (click)="confirm()">
+		Yes
+	</button>
+</mat-dialog-actions>
+
+

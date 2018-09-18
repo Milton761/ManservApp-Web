@@ -3,7 +3,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable, observable, combineLatest, Subject } from 'rxjs';
 import { map, concat, merge } from 'rxjs/operators';
 import { MatSort, MatDialogConfig, MatDialog } from '@angular/material';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { EditReportComponent } from '../edit-report/edit-report.component';
+
 
 export interface Report {
   admin: string;
@@ -171,6 +173,38 @@ export class ScreenComponent implements OnInit {
     );
   }
 
+  openConfirm(idReport: string) {
+    this.idReportSelected = idReport;
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    // dialogConfig.width = ;
+    // dialogConfig.height = '400px';
+    // dialogConfig.direction = 'rtl';
+
+    const titleDialog = 'Delete Report';
+    const messageDialog = 'Are you sure to delete this report ?';
+
+    dialogConfig.data = {
+      id: idReport,
+      title: titleDialog,
+      message: messageDialog,
+    };
+
+    const dialogRef = this.dialog.open( ConfirmDialogComponent, dialogConfig );
+
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data !== undefined) {
+          console.log(data.id);
+          this.deleteReport(data.id);
+        }
+      }
+    );
+
+  }
+
   openEdit(reportEdit: FullReport) {
 
     this.idReportSelected = reportEdit.id;
@@ -182,7 +216,7 @@ export class ScreenComponent implements OnInit {
 
     dialogConfig.data = reportEdit;
 
-    const dialogRef = this.dialog.open(EditReportComponent, dialogConfig);
+    const dialogRef = this.dialog.open( EditReportComponent , dialogConfig);
     dialogRef.afterClosed().subscribe(
       data => {
 

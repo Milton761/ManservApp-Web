@@ -17,8 +17,8 @@
     <div class="col-md-2 text-dark"><a class="link" [routerLink]="['/report', report.id]">{{report.offName}}</a></div>
     <div class="col-md-7 text-dark">{{report.admin}}</div>
     <div class="col-md-1 text-dark" align="right"><button type="button" class="btn btn-outline-info m2" (click)="openEdit(report)">Edit</button></div>
-    <div class="col-md-1 text-dark" align="left"><button type="button" class="btn btn-outline-danger m1" (click)="deleteReport(report.id)">Delete</button></div>
-    <div class="col-md-1 text-secondary" align="right">{{report.dateStart  | date:'dd MMM' }}</div>
+    <div class="col-md-1 text-dark" align="left"><button type="button" class="btn btn-outline-danger m1" (click)="openConfirm(report.id)">Delete</button></div>
+    <div class="col-md-1 text-secondary" align="right">{{report.dateStart   }}</div>
   </div>
   </a>
 </div>
@@ -80,15 +80,43 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+ -->
 
 
-
-<mat-nav-list>
-    <h3 mat-subheader>Reports</h3>
-    <mat-list-item *ngFor="let report of reports | async" [routerLink]="['/report', report.id]"> 
-      <div class="row">
-          <div class="col-xs-12 col-md-8">.col-xs-12 .col-md-8</div>
-          <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
-        </div>
+<mat-list class='list-report'>
+    <h3 mat-header>List of Reports</h3>
+    
+    <mat-list-item class="flex-container">
+      
+        <span style="flex-basis: 250px"><h6 mat-subheader>Agency</h6></span>
+        <span style="flex-grow: 50"><h6 mat-subheader>Administrator</h6></span>
+        <span class="option-list"><h6 mat-subheader>opt1</h6></span>
+        <span class="option-list"><h6 mat-subheader>opt2</h6></span>
+        <span style="flex-grow: 2;"><h6 mat-subheader style="float: right;">Date</h6></span>
+      
+        <mat-divider [inset]="true" ></mat-divider>
     </mat-list-item>
-</mat-nav-list> -->
+
+    <mat-list-item *ngFor="let report of reports | async"> 
+        <span style="flex-basis: 250px"><a class="link" [routerLink]="['/report', report.id]">{{report.offName}}</a></span>
+        <span style="flex-basis: 400px"><h6 mat-subheader>{{report.admin}}</h6></span>
+        <span style="flex-grow: 20">asdsda</span>
+        <div class="button-row">
+            <button mat-icon-button>
+              <mat-icon >create</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon >delete</mat-icon>
+            </button>
+        </div>
+        <span style="flex-basis: 100px;"><h6 mat-subheader style="float: right;">{{report.dateStart  | date:'dd MMM' }}</h6></span>
+      <!-- <div class="row"  >
+        <div class="col-md-2 text-dark"><a class="link" [routerLink]="['/report', report.id]">{{report.offName}}</a></div>
+        <div class="col-md-7 text-dark">{{report.admin}}</div>
+        <div class="col-md-1 text-dark" align="right"><button type="button" class="btn btn-outline-info m2" (click)="openEdit(report)">Edit</button></div>
+        <div class="col-md-1 text-dark" align="left"><button type="button" class="btn btn-outline-danger m1" (click)="openConfirm(report.id)">Delete</button></div>
+        <div class="col-md-1 text-secondary" align="right">{{report.dateStart  | date:'dd MMM' }}</div>
+      </div> -->
+      <mat-divider [inset]="true" ></mat-divider>
+    </mat-list-item>
+</mat-list> -->
