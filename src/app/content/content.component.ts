@@ -3,12 +3,14 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { EditPlaceComponent } from '../edit-place/edit-place.component';
 
 export interface Place { code: string; description: string; name: string; }
 export interface PlaceId extends Place { id: string; }
-export interface Pic {code: string; title: string; description: string; }
+export interface Pic { code: string; title: string; description: string; imgUrl: string; }
 
-export interface FullPlace extends Place {pics: Observable<Pic[]>; }
+export interface FullPlace extends Place { pics: Observable<Pic[]>; }
 
 @Component({
   selector: 'app-content',
@@ -25,7 +27,7 @@ export class ContentComponent implements OnInit {
   fullPlaces: Array<FullPlace> = [];
   obsplaces: Observable<FullPlace[]>;
 
-  constructor(private readonly afs: AngularFirestore, private route: ActivatedRoute) {
+  constructor(private readonly afs: AngularFirestore, private route: ActivatedRoute,  private dialog: MatDialog) {
 
   }
 
@@ -42,17 +44,18 @@ export class ContentComponent implements OnInit {
     this.obsplaces = this.placeCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const place = a.payload.doc.data() as Place;
-        const id = a.payload.doc.id;
-        this.picCollection = this.afs.collection<Pic>('reports/' + this.reportCode + '/places/' + id + '/pics');
+        place.code = a.payload.doc.id;
+        this.picCollection = this.afs.collection<Pic>('reports/' + this.reportCode + '/places/' + place.code + '/pics');
         const picsa = this.picCollection.snapshotChanges().pipe(
           map(actionsb => actionsb.map(b => {
             console.log(b.payload.doc.id);
             const pic = b.payload.doc.data() as Pic;
+            pic.code = b.payload.doc.id;
             return pic;
           }))
         );
         // picsa.subscribe(console.log);
-        const fPlace: FullPlace = {code: place.code, name: place.name, description: place.description, pics: picsa };
+        const fPlace: FullPlace = { code: place.code, name: place.name, description: place.description, pics: picsa };
         return fPlace;
       }))
     );
@@ -80,7 +83,7 @@ export class ContentComponent implements OnInit {
 
     this.placeCollection.snapshotChanges().subscribe(
       snapshots => {
-        snapshots.forEach( snapshot => {
+        snapshots.forEach(snapshot => {
           console.log(snapshot.payload.doc.id);
           const id = snapshot.payload.doc.id;
           const place = snapshot.payload.doc.data() as Place;
@@ -94,13 +97,48 @@ export class ContentComponent implements OnInit {
             }))
           );
           picsa.subscribe();
-          const fPlace: FullPlace = {code: place.code, name: place.name, description: place.description, pics: picsa };
+          const fPlace: FullPlace = { code: place.code, name: place.name, description: place.description, pics: picsa };
           this.fullPlaces.push(fPlace);
         });
       },
-      error => {console.log(error); },
-      () => {console.log('complete'); },
+      error => { console.log(error); },
+      () => { console.log('complete'); },
     );
     console.log(this.fullPlaces);
   }
+
+  updatePlace(place: Place) {
+    const ref = this.afs.collection('reports').doc(this.reportCode).collection('places');
+
+    const newPlace = {name: place.name, description: place.description};
+    ref.doc(place.code).update(newPlace);
+
+  }
+
+  editPlace(place: Place ) {
+    console.log(place);
+
+
+    console.log('open dialog');
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = place;
+
+    const dialogRef = this.dialog.open( EditPlaceComponent , dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      data => {
+          if (data !== undefined) {
+            this.updatePlace(data);
+          }
+        }
+    );
+
+  }
+
+  editPic(idPic: string) {
+    console.log(idPic);
+  }
+
 }

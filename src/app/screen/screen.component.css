@@ -1,5 +1,6 @@
 .link{
-	text-decoration: underline
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .m1{
@@ -30,11 +31,44 @@
 	text-align: center
 }
 
-.flex-container:hover {
+/* .flex-container:hover {
 	background: transparent;
-}
+} */
 
 .option-list{
 	background: #EC7063;
 	flex-basis: 40px;
+}
+
+.icon-option-edit{
+	color: transparent;
+}
+
+.icon-option-delete{
+	color: transparent
+}
+
+
+
+/* .icon-option-edit:hover{
+	color: rebeccapurple;
+} */
+
+.item-list-container{
+	display: flex;
+}
+.item-list-container:hover .icon-option-edit{
+	color: gray;
+}
+
+.item-list-container:hover .icon-option-edit:hover{
+	color: purple;
+}
+
+.item-list-container:hover .icon-option-delete{
+	color: gray;
+}
+
+.item-list-container:hover .icon-option-delete:hover{
+	color: palevioletred;
 }

@@ -1,5 +1,5 @@
 .container {
-	border-radius: 5px;
+	border-radius: 2px;
 	background: #f2f2f2;
 	width: 297mm;
 	height: 209.5mm;  
@@ -24,8 +24,7 @@
 @media print {
 	
     .myDivToPrint {
-		
-        background-color: blue;
+		background: white;
         height: 100%;
         width: 100%;
 		position: absolute;
@@ -38,10 +37,26 @@
 		
 	}
 	.hideMeInPrint { display: none; }
+	.icon-report{ display: none; }
 	@page {
 		size: A4 landscape
 	}
 	.Footer { display:none; }
 	.Header { display:none; }
 	
+}
+
+
+.options-container {
+	
+	display: flex;
+	justify-content: flex-end;
+}
+
+.header-container {
+	display: flex;
+}
+
+.card{
+	cursor: pointer;
 }

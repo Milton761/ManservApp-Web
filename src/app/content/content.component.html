@@ -1,17 +1,34 @@
-<button type="button" class="btn btn-outline-primary" onClick="window.print()">Save as PDF</button>
+<!-- <button type="button" class="btn btn-outline-primary" onClick="window.print()">Save as PDF</button> -->
+
+
+<div class="options-container"> 
+  <button mat-raised-button onClick="window.print()">
+    <mat-icon >print</mat-icon> Print as PDF
+  </button>
+</div>
+
+<hr>
 
 <div class="myDivToPrint">
-  <div *ngFor="let place of obsplaces | async as places  ; index as ia">
+  <div *ngFor="let place of obsplaces | async as places  ; index as ia ">
     <div *ngFor="let pic of place.pics  | async as pics ; index as ib" >
         
         
         <div class="container" *ngIf="ib%3===0">
-            <h2>Tecnical Report</h2>
+          <div class="header-container">
+              <h2>Tecnical Report</h2>
+              <button class="icon-report" mat-icon-button style="margin-left: auto" (click)="editPlace(place)">
+                  <mat-icon style="color: gray">create</mat-icon>
+              </button>
+          </div>
+            
+            
             <hr>
             <h4>Place: {{place.name}}</h4>
             <div class="row" >
                 <div class="col-md-4" > 
-                  <div class="card">
+                  <div class="card" (click)="editPic(pics[ib].code)">
+                    
                     <img src="{{pics[ib].imgUrl}}" class="img-fluid" alt="Responsive image">
                     <div class="inner">
                       <h6>{{pics[ib].title}}</h6>
@@ -20,7 +37,7 @@
                   </div>
                 </div>
                 <div class="col-md-4" *ngIf="ib+1 < pics.length">
-                    <div class="card">
+                    <div class="card"  (click)="editPic(pics[ib+1].code)" >
                         <img src="{{pics[ib+1].imgUrl}}" class="img-fluid" alt="Responsive image">
                         <div class="inner">
                           <h6>{{pics[ib+1].title}}</h6>
@@ -29,7 +46,7 @@
                       </div>
                 </div>
                 <div class="col-md-4" *ngIf="ib+2 < pics.length">
-                    <div class="card">
+                    <div class="card"  (click)="editPic(pics[ib+2].code)">
                         <img src="{{pics[ib+2].imgUrl}}" class="img-fluid" alt="Responsive image">
                         <div class="inner">
                           <h6>{{pics[ib+2].title}}</h6>
@@ -41,7 +58,7 @@
             <hr>
             <div class="inner">
               <h5>Comments: </h5> 
-              <a> asdasd{{place.description}}</a>
+              <a> {{place.description}} </a>
             </div>
         </div>
         
