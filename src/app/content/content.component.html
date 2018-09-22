@@ -27,17 +27,17 @@
             <h4>Place: {{place.name}}</h4>
             <div class="row" >
                 <div class="col-md-4" > 
-                  <div class="card" (click)="editPic(pics[ib].code)">
+                  <div class="card" (click)="editPic(place.code, pics[ib])">
                     
                     <img src="{{pics[ib].imgUrl}}" class="img-fluid" alt="Responsive image">
-                    <div class="inner">
+                    <div class="inner">                       
                       <h6>{{pics[ib].title}}</h6>
                       <a>{{pics[ib].description}}</a>
                     </div> 
                   </div>
                 </div>
                 <div class="col-md-4" *ngIf="ib+1 < pics.length">
-                    <div class="card"  (click)="editPic(pics[ib+1].code)" >
+                    <div class="card"  (click)="editPic(place.code, pics[ib+1])" >
                         <img src="{{pics[ib+1].imgUrl}}" class="img-fluid" alt="Responsive image">
                         <div class="inner">
                           <h6>{{pics[ib+1].title}}</h6>
@@ -46,7 +46,7 @@
                       </div>
                 </div>
                 <div class="col-md-4" *ngIf="ib+2 < pics.length">
-                    <div class="card"  (click)="editPic(pics[ib+2].code)">
+                    <div class="card"  (click)="editPic(place.code, pics[ib+2])">
                         <img src="{{pics[ib+2].imgUrl}}" class="img-fluid" alt="Responsive image">
                         <div class="inner">
                           <h6>{{pics[ib+2].title}}</h6>

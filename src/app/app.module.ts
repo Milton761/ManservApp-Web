@@ -17,6 +17,7 @@ import { TemplateAgencyComponent } from './template-agency/template-agency.compo
 import { EditReportComponent } from './edit-report/edit-report.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { EditPlaceComponent } from './edit-place/edit-place.component';
+import { EditPicComponent } from './edit-pic/edit-pic.component';
 
 
 
@@ -32,6 +33,7 @@ import { EditPlaceComponent } from './edit-place/edit-place.component';
     EditReportComponent,
     ConfirmDialogComponent,
     EditPlaceComponent,
+    EditPicComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,11 @@ import { EditPlaceComponent } from './edit-place/edit-place.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [EditReportComponent, ConfirmDialogComponent, EditPlaceComponent]
+  entryComponents: [
+    EditReportComponent,
+    ConfirmDialogComponent,
+    EditPlaceComponent,
+    EditPicComponent
+  ]
 })
 export class AppModule { }

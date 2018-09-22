@@ -44,7 +44,7 @@ export class ScreenComponent implements OnInit {
   private previusPointer: any;
   private currentIndex = 0;
   private currentSize: number;
-
+  isLoading = true;
 
   constructor(private readonly afs: AngularFirestore, private readonly afs2: AngularFirestore, private dialog: MatDialog) {
     console.log('test0');
@@ -70,19 +70,34 @@ export class ScreenComponent implements OnInit {
           id: a.payload.doc.id,
           doc: a.payload.doc
         };
+        this.isLoading = false;
         return fReport;
       }))
     );
+    // this.reports.subscribe(
+    //   data => {},
+    //   error => {},
+    //   () => {console.log('here'); }
+    // );
 
-    this.reports.subscribe(
-      data => {
-        this.currentSize = data.length;
-        this.currentIndex += data.length;
-        this.lastVisible = data[data.length - 1].doc;
-        this.firtVisible = data[0].doc;
-        console.log(this.lastVisible);
-      }
-    );
+    // this.reports.subscribe(
+    //   data => {
+    //     this.currentSize = data.length;
+    //     this.currentIndex += data.length;
+    //     this.lastVisible = data[data.length - 1].doc;
+    //     this.firtVisible = data[0].doc;
+    //     console.log('LAST', this.lastVisible);
+    //     console.log('LOAD', this.isLoading);
+    //     this.isLoading = false;
+    //   },
+    //   error => {
+    //     console.log('error', error);
+    //   },
+    //   () => {
+    //     console.log('LOAD', this.isLoading);
+    //     this.isLoading = false;
+    //   },
+    // );
     // console.log('test1');
   }
   ngOnInit() {

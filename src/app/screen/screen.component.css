@@ -27,8 +27,13 @@
 
 .flex-container{
 	display: flex;
-	background:#F7F9F9;
-	text-align: center
+	background:#3F51B5;
+	
+	text-align: center;
+}
+
+.tag {
+	color: white;
 }
 
 /* .flex-container:hover {
@@ -57,12 +62,14 @@
 .item-list-container{
 	display: flex;
 }
+
+
 .item-list-container:hover .icon-option-edit{
 	color: gray;
 }
 
 .item-list-container:hover .icon-option-edit:hover{
-	color: purple;
+	color: #00BFA5;
 }
 
 .item-list-container:hover .icon-option-delete{
@@ -70,5 +77,5 @@
 }
 
 .item-list-container:hover .icon-option-delete:hover{
-	color: palevioletred;
+	color: #00BFA5;
 }

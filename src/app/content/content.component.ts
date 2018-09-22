@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { EditPlaceComponent } from '../edit-place/edit-place.component';
+import { EditPicComponent } from '../edit-pic/edit-pic.component';
 
 export interface Place { code: string; description: string; name: string; }
 export interface PlaceId extends Place { id: string; }
@@ -115,6 +116,26 @@ export class ContentComponent implements OnInit {
 
   }
 
+  updatePic(placeCode: string, pic: Pic) {
+
+    console.log('placeCode', placeCode);
+    const ref = this.afs.
+    collection('reports').
+    doc(this.reportCode).
+    collection('places').
+    doc(placeCode).
+    collection('pics');
+
+    const newPic = {
+      code: pic.code,
+      description: pic.description,
+      title: pic.description,
+      imgUrl: pic.imgUrl
+    };
+    console.log('updatePic', pic.code);
+    ref.doc(pic.code).update(newPic);
+  }
+
   editPlace(place: Place ) {
     console.log(place);
 
@@ -137,8 +158,29 @@ export class ContentComponent implements OnInit {
 
   }
 
-  editPic(idPic: string) {
-    console.log(idPic);
+  editPic(placeCode: string, pic: Pic) {
+    console.log('open dialog placeCode', placeCode);
+    console.log('open dialog PIC', pic);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      pic : pic,
+      placeCode : placeCode
+    };
+
+    const dialogRef = this.dialog.open( EditPicComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data !==  undefined) {
+          console.log('afterClose', data);
+          this.updatePic(placeCode, data);
+        }
+      }
+    );
+
+
   }
 
 }

@@ -18,6 +18,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { NguiInviewModule, NguiListModule, NguiUtilsModule } from '@ngui/common';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressBarModule
   ],
   exports: [
     MatInputModule,
@@ -62,7 +64,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     NguiUtilsModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatProgressBarModule
   ],
   providers: [AuthService],
 })
