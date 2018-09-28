@@ -97,7 +97,8 @@
         <mat-divider [inset]="true" ></mat-divider>
     </mat-list-item>
     <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
-    <mat-list-item class="item-list-container" *ngFor="let report of reports | async"> 
+    <div *ngIf="(reports | async)?.length==0"><h6 mat-subheader>No reports found</h6></div>
+    <mat-list-item class="item-list-container" *ngFor="let report of reports | async ; index as i"> 
         <span style="flex-basis: 250px"><h6 mat-subheader class="link" [routerLink]="['/report', report.id]">{{report.offName}}</h6></span>
         <span style="flex-basis: 400px"><h6 mat-subheader>{{report.admin}}</h6></span>
         <span style="flex-grow: 20"></span>

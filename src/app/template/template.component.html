@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-xl-2">
-    <h4> Agency Template</h4> 
+    <h4>Agency Template</h4> 
   </div>
   <div class="col-xl-6">
     
@@ -20,7 +20,7 @@
 
 <div style="height: 5mm;"></div>
 
-<div class="list-group">
+<!-- <div class="list-group">
 
   <button type="button" class="list-group-item list-group-item-action active">
     <div class="row"  >
@@ -37,4 +37,43 @@
     <div class="col-md-1 text-dark" align="right"><button type="button" class="btn btn-outline-danger m1" (click)="deleteAgency(agency.code)">Delete</button></div>
   </div>
   </a>
-</div>
+</div> -->
+
+
+
+<mat-list class='list-report'>
+    <!-- <h4 mat-header>List of Agencies</h4> -->
+    <mat-divider></mat-divider>
+    
+    <mat-list-item class="flex-container">
+        
+
+        <span style="flex-basis: 150px"><h5 class="tag" mat-subheader>Code</h5></span>
+        <span style="flex-grow: 50"><h5 class="tag" mat-subheader>Name</h5></span>
+      
+        <mat-divider [inset]="true" ></mat-divider>
+    </mat-list-item>
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+    <div *ngIf="(reports | async)?.length==0"><h6 mat-subheader>No agencies found</h6></div>
+    <mat-list-item class="item-list-container"  *ngFor="let agency of agencies | async"> 
+        <span style="flex-basis: 150px"><h6 mat-subheader class="link" [routerLink]="['/agency', agency.code]">{{agency.code}}</h6></span>
+        <span style="flex-basis: 400px"><h6 mat-subheader>{{agency.name}}</h6></span>
+        <span style="flex-grow: 20"></span>
+        <div class="button-row">
+            <!-- <button mat-icon-button class='btn-opt'>
+              <mat-icon class="icon-option-edit" (click)="openEdit(report)">create</mat-icon>
+            </button> -->
+            <button mat-icon-button>
+              <mat-icon class="icon-option-delete" (click)="deleteAgency(agency.code)">delete</mat-icon>
+            </button>
+        </div>
+      <!-- <div class="row"  >
+        <div class="col-md-2 text-dark"><a class="link" [routerLink]="['/report', report.id]">{{report.offName}}</a></div>
+        <div class="col-md-7 text-dark">{{report.admin}}</div>
+        <div class="col-md-1 text-dark" align="right"><button type="button" class="btn btn-outline-info m2" (click)="openEdit(report)">Edit</button></div>
+        <div class="col-md-1 text-dark" align="left"><button type="button" class="btn btn-outline-danger m1" (click)="openConfirm(report.id)">Delete</button></div>
+        <div class="col-md-1 text-secondary" align="right">{{report.dateStart  | date:'dd MMM' }}</div>
+      </div> -->
+      <mat-divider [inset]="true" ></mat-divider>
+    </mat-list-item>
+</mat-list> 

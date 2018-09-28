@@ -17,7 +17,7 @@ export class TemplateComponent implements OnInit {
 
   private code: string;
   private name: string;
-
+  isLoading = true;
 
   private agencyCollection: AngularFirestoreCollection<Agency>;
   agencies: Observable<Agency[]>;
@@ -41,6 +41,11 @@ export class TemplateComponent implements OnInit {
 
   loadTemplates() {
     this.agencies = this.agencyCollection.valueChanges();
+    this.agencies.subscribe(
+      data => { this.isLoading = false; },
+      error => {},
+      () => { }
+    );
   }
 
   deleteAgency(code: string) {

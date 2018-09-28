@@ -18,6 +18,7 @@ export class TemplateAgencyComponent implements OnInit {
   places: Observable<Place[]>;
   name = '';
   private placeCode: string;
+  isLoading = true;
 
   constructor(private readonly afs: AngularFirestore, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
@@ -38,6 +39,12 @@ export class TemplateAgencyComponent implements OnInit {
         const pic = b.payload.doc.data() as Place;
         return {id, ...pic};
       }))
+    );
+
+    this.places.subscribe(
+      data => { this.isLoading = false; },
+      error => {},
+      () => {}
     );
   }
 

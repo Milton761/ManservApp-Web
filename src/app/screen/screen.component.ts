@@ -70,15 +70,17 @@ export class ScreenComponent implements OnInit {
           id: a.payload.doc.id,
           doc: a.payload.doc
         };
-        this.isLoading = false;
+        // this.isLoading = false;
         return fReport;
       }))
     );
-    // this.reports.subscribe(
-    //   data => {},
-    //   error => {},
-    //   () => {console.log('here'); }
-    // );
+
+
+    this.reports.subscribe(
+      data => { this.isLoading = false; },
+      error => {},
+      () => {console.log('here'); }
+    );
 
     // this.reports.subscribe(
     //   data => {

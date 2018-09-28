@@ -15,7 +15,7 @@
 
 <div style="height: 5mm;"></div>
 
-<div class="list-group">
+<!-- <div class="list-group">
 
   <button type="button" class="list-group-item list-group-item-action active">
     <div class="row"  >
@@ -30,3 +30,40 @@
   </div>
   </a>
 </div>
+ -->
+
+
+<mat-list class='list-report'>
+    <!-- <h4 mat-header>List of Agencies</h4> -->
+    <mat-divider></mat-divider>
+    
+    <mat-list-item class="flex-container">
+        
+
+        <span style="flex-grow: 1"><h5 class="tag" mat-subheader>Name</h5></span>
+      
+        <mat-divider [inset]="true" ></mat-divider>
+    </mat-list-item>
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+    <div *ngIf="(reports | async)?.length==0"><h6 mat-subheader>No places found</h6></div>
+    <mat-list-item class="item-list-container"  *ngFor="let place of places | async"> 
+        <span style="flex-grow: 1"><h6 mat-subheader>{{place.name}}</h6></span>
+        <span style="flex-grow: 20"></span>
+        <div class="button-row">
+            <!-- <button mat-icon-button class='btn-opt'>
+              <mat-icon class="icon-option-edit" (click)="openEdit(report)">create</mat-icon>
+            </button> -->
+            <button mat-icon-button>
+              <mat-icon class="icon-option-delete" (click)="deletePlace(place.id)">delete</mat-icon>
+            </button>
+        </div>
+      <!-- <div class="row"  >
+        <div class="col-md-2 text-dark"><a class="link" [routerLink]="['/report', report.id]">{{report.offName}}</a></div>
+        <div class="col-md-7 text-dark">{{report.admin}}</div>
+        <div class="col-md-1 text-dark" align="right"><button type="button" class="btn btn-outline-info m2" (click)="openEdit(report)">Edit</button></div>
+        <div class="col-md-1 text-dark" align="left"><button type="button" class="btn btn-outline-danger m1" (click)="openConfirm(report.id)">Delete</button></div>
+        <div class="col-md-1 text-secondary" align="right">{{report.dateStart  | date:'dd MMM' }}</div>
+      </div> -->
+      <mat-divider [inset]="true" ></mat-divider>
+    </mat-list-item>
+</mat-list> 
